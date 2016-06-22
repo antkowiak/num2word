@@ -18,7 +18,7 @@
 #include <string>
 #include <iostream>
 
-typedef unsigned long long TNumber;
+typedef unsigned long long int TNumber;
 
 static const std::string EMPTY  = "";
 
@@ -127,7 +127,7 @@ int main(int argc, char * argv[])
                     9999999999999999,
                     99999999999999999,
                     999999999999999999,
-                    1999999999999999999,
+                    1799999999999999999,
                     0 };
 
     for (TNumber i = 0 ; i < 57 ; ++i)
