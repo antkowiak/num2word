@@ -134,9 +134,9 @@ int main(int argc, char * argv[])
         std::string line;
         while (std::getline(std::cin, line))
         {
+            // Interactively convert the input
             std::cout << numberToString(strtoull(line.c_str(), NULL, 0)) << std::endl;
         }
-        // Interactively convert the input
     }
 
     return 0;
