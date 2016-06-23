@@ -21,6 +21,8 @@
 typedef unsigned long long int TNumber;
 
 static const std::string EMPTY  = "";
+static const std::string SPACE  = " ";
+static const std::string HYPHEN = "-";
 
 static const std::string ZERO   = "zero";
 
@@ -77,64 +79,50 @@ static std::string numberToString(TNumber n)
         ones += 10;
 
     if (quintillions > 0)
-        result += numberToString(quintillions) + QUINTILLION;
+        result += numberToString(quintillions) + SPACE + QUINTILLION + SPACE;
 
     if (quadrillions > 0)
-        result += numberToString(quadrillions) + QUADRILLION;
+        result += numberToString(quadrillions) + SPACE + QUADRILLION + SPACE;
 
     if (trillions > 0)
-        result += numberToString(trillions) + TRILLION;
+        result += numberToString(trillions) + SPACE + TRILLION + SPACE;
 
     if (billions > 0)
-        result += numberToString(billions) + BILLION;
+        result += numberToString(billions) + SPACE + BILLION + SPACE;
 
     if (millions > 0)
-        result += numberToString(millions) + MILLION;
+        result += numberToString(millions) + SPACE + MILLION + SPACE;
 
     if (thousands > 0)
-        result += numberToString(thousands) + THOUSAND;
+        result += numberToString(thousands) + SPACE + THOUSAND + SPACE;
 
     if (hundreds > 0)
-        result += numberToString(hundreds) + HUNDRED;
+        result += numberToString(hundreds) + SPACE + HUNDRED + SPACE;
 
     if (tens > 1)
+    {
         result += TENS_toString(tens);
 
+        // Hyphenate tens followed by non-zero ones
+        if (ones > 0)
+            result += HYPHEN;
+        else
+            result += SPACE;
+    }
+
     result += ONES_toString(ones);
+
+    // Remove any trailing SPACE
+    if ( (!result.empty()) && (result.rfind(SPACE) == result.size() - SPACE.size()) )
+        result.resize(result.size() - SPACE.size());
 
     return result;
 }
 
 int main(int argc, char * argv[])
 {
-    TNumber n[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
-                    19, 20, 21, 22, 29, 30, 31, 32, 99, 100, 101, 102,
-                    119, 120, 121, 129, 130, 131, 199, 200, 201, 202,
-                    99,
-                    999,
-                    9999,
-                    99999,
-                    999999,
-                    9999999,
-                    99999999,
-                    999999999,
-                    9999999999,
-                    99999999999,
-                    999999999999,
-                    9999999999999,
-                    99999999999999,
-                    999999999999999,
-                    9999999999999999,
-                    99999999999999999,
-                    999999999999999999,
-                    1799999999999999999,
-                    0 };
-
-    for (TNumber i = 0 ; i < 57 ; ++i)
-    {
-        std::cout << n[i] << " " << numberToString(n[i]) << std::endl;
-    }
+    for (TNumber i = 0 ; i <= 100000 ; ++i)
+        std::cout << i << " '" << numberToString(i) << "'" << std::endl;
 
     return 0;
 }
-
