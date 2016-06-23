@@ -121,8 +121,23 @@ static std::string numberToString(TNumber n)
 
 int main(int argc, char * argv[])
 {
-    for (TNumber i = 0 ; i <= 100000 ; ++i)
-        std::cout << i << " '" << numberToString(i) << "'" << std::endl;
+    if (argc > 1)
+    {
+        // Convert each of the arguments, separated with a newline
+        for (int count = 1 ; count < argc ; ++count)
+        {
+            std::cout << numberToString(strtoull(argv[count], NULL, 0)) << std::endl;
+        }
+    }
+    else
+    {
+        std::string line;
+        while (std::getline(std::cin, line))
+        {
+            std::cout << numberToString(strtoull(line.c_str(), NULL, 0)) << std::endl;
+        }
+        // Interactively convert the input
+    }
 
     return 0;
 }
